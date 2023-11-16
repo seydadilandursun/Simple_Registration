@@ -1,0 +1,29 @@
+# Check if the user wants to login or sign up
+request_check = input("Do you want to login or sign up for a new account credentials?\nEnter L for login, S for sign up: ")
+
+# Define username/password
+username = input("Enter username: ")
+password = input("Enter password: ")
+
+# Check if the user wants to log out
+log_out = input("Enter E for log out: ")
+
+# Create a dictionary to store user credentials
+list_of_users = {}
+
+# Check if the user wants to login
+if request_check == "L" and username in list_of_users.keys() and password == list_of_users[username]:
+    print("Successful login")
+    # Check if the user wants to log out after successful login
+    if log_out == "E":
+        print("Successful log out")
+
+# Check if the user wants to sign up
+elif request_check == "S" and username not in list_of_users.keys():
+    # Update the dictionary with the new user credentials
+    list_of_users.update({username: password})
+    print("Successful register")
+
+# If neither login nor sign up conditions are met, ask the user to try again
+else:
+    print("Please try it again")
