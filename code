@@ -1,29 +1,34 @@
-# Check if the user wants to login or sign up
-request_check = input("Do you want to login or sign up for a new account credentials?\nEnter L for login, S for sign up: ")
+list_of_users = []
+while True:
+    request_check = input("Do you want to login or sign up for new account credentials? Enter 'L' for login, 'S' for sign up: ")
+    username = input("Enter username: ")
+    password = input("Enter password: ")
 
-# Define username/password
-username = input("Enter username: ")
-password = input("Enter password: ")
+    if request_check == "L":
+        found_user = False
+        for user in list_of_users:
+            if user['username'] == username and user['password'] == password:
+                found_user = True
+                print("Successful log in")
+                log_out = input("Enter 'E' to log out: ")
+                if log_out == "E":
+                    print("Successful log out")
+                break
 
-# Check if the user wants to log out
-log_out = input("Enter E for log out: ")
+        if not found_user:
+            print("Invalid login credentials")
 
-# Create a dictionary to store user credentials
-list_of_users = {}
+    elif request_check == "S":
+        username_exists = False
+        for user in list_of_users:
+            if  user['username'] == username:
+                username_exists = True
+                print("Username already exists. Please choose another one.")
+                break
 
-# Check if the user wants to login
-if request_check == "L" and username in list_of_users.keys() and password == list_of_users[username]:
-    print("Successful login")
-    # Check if the user wants to log out after successful login
-    if log_out == "E":
-        print("Successful log out")
-
-# Check if the user wants to sign up
-elif request_check == "S" and username not in list_of_users.keys():
-    # Update the dictionary with the new user credentials
-    list_of_users.update({username: password})
-    print("Successful register")
-
-# If neither login nor sign up conditions are met, ask the user to try again
-else:
-    print("Please try it again")
+        if not username_exists:
+            list_of_users.append({'username': username, 'password': password})
+            print("Successful registration")
+            print(*list_of_users)
+    else:
+        print("Invalid option. Please try again.")
