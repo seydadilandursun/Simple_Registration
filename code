@@ -1,4 +1,4 @@
-list_of_users = []
+list_of_users = [] 
 while True:
     request_check = input("Do you want to login or sign up for new account credentials? Enter 'L' for login, 'S' for sign up: ")
     username = input("Enter username: ")
